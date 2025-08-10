@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     [Header("Spawn Elements")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer spawnIndicator;
+    private bool hasSpawned = false;
 
     [Header("Settings")] 
     [SerializeField] private float moveSpeed;
@@ -34,6 +35,8 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!hasSpawned) return;
+        
         FollowPlayer();
         TryAttack();
     }
@@ -52,6 +55,7 @@ public class EnemyMovement : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         spawnIndicator.enabled = false;
+        hasSpawned = true;
     }
 
     private void FollowPlayer()

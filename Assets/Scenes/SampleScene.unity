@@ -6422,6 +6422,7 @@ MonoBehaviour:
   spawnIndicator: {fileID: 2139230646}
   moveSpeed: 1
   attackRadius: 1
+  spawnAnimationScale: 0.5
   dieParticles: {fileID: 785428436}
   gizmos: 1
 --- !u!1 &1304129862
