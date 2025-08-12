@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4347380545048210995}
   - component: {fileID: 6628973507960767093}
   - component: {fileID: 345042585689443259}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spawn Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,8 @@ GameObject:
   - component: {fileID: 8861622605549929243}
   - component: {fileID: 3250162258614482614}
   - component: {fileID: 808633817044712075}
-  m_Layer: 0
+  - component: {fileID: 8407597392920602627}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,6 +171,42 @@ MonoBehaviour:
   attackRate: 1
   attackRadius: 5
   gizmos: 0
+--- !u!58 &8407597392920602627
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220113435490129617}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.4}
+  m_Radius: 0.4
 --- !u!1 &6961294737950542669
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +218,7 @@ GameObject:
   - component: {fileID: 5576259892109800662}
   - component: {fileID: 7436320372838624946}
   - component: {fileID: 640639533366052684}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +319,7 @@ GameObject:
   - component: {fileID: 8710308942988446817}
   - component: {fileID: 6351797914980849031}
   - component: {fileID: 1607403748650351773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Death Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
