@@ -17,6 +17,10 @@ public class Enemy : MonoBehaviour
     [Header("Settings")] 
     [SerializeField] private float spawnAnimationScale;
     
+    [Header("Health")]
+    [SerializeField] private int maxHealth;
+    private int currentHealth;
+    
     [Header("Effects")]
     [SerializeField] private ParticleSystem dieParticles;
     
@@ -41,6 +45,8 @@ public class Enemy : MonoBehaviour
 
         SpawnAnimation();
         attackDelay = 1f / attackRate;
+        
+        currentHealth = maxHealth;
         
     }
 
@@ -102,6 +108,16 @@ public class Enemy : MonoBehaviour
     {
         spriteRenderer.enabled = visible;
         spawnIndicator.enabled = !visible;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int realDamage = Mathf.Min(damage, currentHealth); 
+        currentHealth -= realDamage;
+        if (currentHealth <= 0)
+        {
+            PlayDeathAnimation();
+        }
     }
     
     private void OnDrawGizmos()

@@ -166,6 +166,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7436320372838624946}
   spawnIndicator: {fileID: 6628973507960767093}
   spawnAnimationScale: 2
+  maxHealth: 10
   dieParticles: {fileID: 6351797914980849031}
   damage: 10
   attackRate: 1
