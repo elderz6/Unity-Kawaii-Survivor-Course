@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7436320372838624946}
   spawnIndicator: {fileID: 6628973507960767093}
+  collider2D: {fileID: 8407597392920602627}
   spawnAnimationScale: 2
   maxHealth: 10
   dieParticles: {fileID: 6351797914980849031}
@@ -179,7 +180,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4220113435490129617}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

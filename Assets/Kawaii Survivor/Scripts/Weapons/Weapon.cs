@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
     
     [Header("Elements")]
     [SerializeField] private Transform hitDetectionTransform;
+    [SerializeField] private BoxCollider2D hitDetectionCollider;
     [SerializeField] private Animator animator;
     
     [Header("Attack")]
@@ -47,8 +48,8 @@ public class Weapon : MonoBehaviour
 
     private Enemy FindClosestEnemy()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
-
+       Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, enemyMask);
+       
         Enemy closestEnemy = null;
         float minDistance = range;
 
@@ -72,14 +73,16 @@ public class Weapon : MonoBehaviour
     private void AutoAim()
     {
         Enemy closestEnemy = FindClosestEnemy();
+        Vector2 targetUpVector = Vector3.up;
 
         if (closestEnemy != null)
         {
             ManageAttackTimer();
             transform.right = (closestEnemy.transform.position - transform.position).normalized;
+            targetUpVector = transform.up;
         }
         
-        transform.up = Vector3.Lerp(transform.up, Vector3.up, Time.deltaTime * aimLerpSpeed);
+        transform.up = Vector3.Lerp(transform.up, targetUpVector, Time.deltaTime * aimLerpSpeed);
         Wait();
     }
 
@@ -119,7 +122,13 @@ public class Weapon : MonoBehaviour
 
     private void Attack()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(hitDetectionTransform.position, hitDetectionRadius, enemyMask);
+        //Collider2D[] enemies = Physics2D.OverlapCircleAll(hitDetectionTransform.position, hitDetectionRadius, enemyMask);
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(
+            hitDetectionTransform.position, 
+            hitDetectionCollider.bounds.size,
+            hitDetectionTransform.localEulerAngles.z,
+            enemyMask);
+        
         for (int i = 0; i < enemies.Length; i++)
         {
             Enemy enemy = enemies[i].GetComponent<Enemy>();

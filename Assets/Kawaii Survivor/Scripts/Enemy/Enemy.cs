@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
@@ -12,6 +13,7 @@ public class Enemy : MonoBehaviour
     [Header("Spawn Elements")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer spawnIndicator;
+    [SerializeField] private Collider2D collider2D;
     private bool hasSpawned = false;
     
     [Header("Settings")] 
@@ -30,6 +32,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float attackRadius;
     private float attackDelay;
     private float attackTimer;
+
+    [Header("Actions")] 
+    public static Action<int, Vector2> onDamageTaken;
     
     [Header("DEBUG")]
     [SerializeField] private bool gizmos;
@@ -71,6 +76,7 @@ public class Enemy : MonoBehaviour
         SetRendererVisible(true);
        
         hasSpawned = true;
+        collider2D.enabled = true;
         
         movement.SetPlayer(player);
     }
@@ -114,6 +120,8 @@ public class Enemy : MonoBehaviour
     {
         int realDamage = Mathf.Min(damage, currentHealth); 
         currentHealth -= realDamage;
+        onDamageTaken?.Invoke(damage, transform.position);
+        
         if (currentHealth <= 0)
         {
             PlayDeathAnimation();
