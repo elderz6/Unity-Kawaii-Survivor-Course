@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class RangedEnemyAttack : MonoBehaviour
 {
@@ -9,11 +10,43 @@ public class RangedEnemyAttack : MonoBehaviour
     private Player player;
     private RangedEnemy ownerEnemy;
     
+    [Header("Pooling")]
+    private ObjectPool<EnemyBullet> bulletPool;
+    
     Vector2 gizmoDirection;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        bulletPool = new ObjectPool<EnemyBullet>(CreateFunction, ActionOnGet, ActionOnRelease, ActionOnDestroy);
+    }
+    
+    EnemyBullet CreateFunction()
+    {
+        EnemyBullet bulletInstance = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+        bulletInstance.Configure(this);
+        return bulletInstance;
+    }
+    
+    private void ActionOnGet(EnemyBullet bullet)
+    {
+        bullet.Reload();
+        bullet.transform.position = shootingPoint.position;
+        bullet.gameObject.SetActive(true);
+    }
+    
+    private void ActionOnRelease(EnemyBullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+    
+    private void ActionOnDestroy(EnemyBullet bullet)
+    {
+        Destroy(bullet.gameObject);
+    }
+
+    public void ReleaseBullet(EnemyBullet bullet)
+    {
+        bulletPool.Release(bullet);
     }
 
     // Update is called once per frame
@@ -50,8 +83,8 @@ public class RangedEnemyAttack : MonoBehaviour
     private void Shoot()
     {
         Vector2 direction = (player.GetCenter() - (Vector2)shootingPoint.position).normalized;
-        
-        EnemyBullet bulletInstance = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+
+        EnemyBullet bulletInstance = bulletPool.Get();
         bulletInstance.Shoot(ownerEnemy.GetDamage(), direction, ownerEnemy.GetBulletSpeed());
         gizmoDirection = direction;
     }
