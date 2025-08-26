@@ -214,7 +214,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -239,9 +239,10 @@ MonoBehaviour:
   maxHealth: 5
   dieParticles: {fileID: 6867285835266517001}
   damage: 1
+  bulletSpeed: 5
   attackRate: 1
-  attackRadius: 1
-  gizmos: 0
+  attackRadius: 10
+  gizmos: 1
   attack: {fileID: 4195691352186726610}
 --- !u!114 &4195691352186726610
 MonoBehaviour:
@@ -255,6 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3ff05a99f3ee6438dafb2065966aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2966748961956918039, guid: 1066ec5fb00591b418f016fa0b79b957, type: 3}
   shootingPoint: {fileID: 2619350528364230378}
 --- !u!1 &7210330114837263899
 GameObject:

@@ -28,6 +28,7 @@ public abstract class Enemy : MonoBehaviour
     
     [Header("Attack")]
     [SerializeField] protected int damage;
+    [SerializeField] protected int bulletSpeed;
     [SerializeField] protected int attackRate;
     [SerializeField] protected float attackRadius;
     protected float attackDelay;
@@ -146,9 +147,18 @@ public abstract class Enemy : MonoBehaviour
     {
         return attackTimer;
     }
-
+    public int GetDamage()
+    {
+        return damage;
+    }
+    public int GetBulletSpeed()
+    {
+        return bulletSpeed;
+    }
     public void SetAttackTimer(float newTimer)
     {
         attackTimer = newTimer;
     }
+
+  
 }

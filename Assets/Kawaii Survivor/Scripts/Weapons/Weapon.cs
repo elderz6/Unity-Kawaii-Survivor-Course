@@ -28,6 +28,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float hitDetectionRadius;
     [SerializeField] private float aimLerpSpeed;
     [SerializeField] private LayerMask enemyMask;
+    
+    [Header("Debug")]
+    [SerializeField] private bool enableGizmos;
     void Start()
     {
         state = State.Idle;
@@ -144,6 +147,7 @@ public class Weapon : MonoBehaviour
     
     private void OnDrawGizmosSelected()
     {
+        if(!enableGizmos) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
         

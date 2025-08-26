@@ -1,7 +1,10 @@
+using UnityEditor;
 using UnityEngine;
 
 public class RangedEnemyAttack : MonoBehaviour
 {
+    [Header("Elements")]
+    [SerializeField] private EnemyBullet bulletPrefab;
     [SerializeField] private Transform shootingPoint;
     private Player player;
     private RangedEnemy ownerEnemy;
@@ -37,10 +40,8 @@ public class RangedEnemyAttack : MonoBehaviour
     private void ManageShooting()
     {
         ownerEnemy.SetAttackTimer(ownerEnemy.GetAttackTimer() + Time.deltaTime);
-        Debug.Log("manage shooting");
         if (ownerEnemy.GetAttackTimer() >= ownerEnemy.GetAttackDelay())
         {
-            Debug.Log("timer check");
             ownerEnemy.SetAttackTimer(0);
             Shoot();
         }
@@ -48,8 +49,10 @@ public class RangedEnemyAttack : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log("shooting");
-        Vector2 direction = (player.transform.position - shootingPoint.position).normalized;
+        Vector2 direction = (player.GetCenter() - (Vector2)shootingPoint.position).normalized;
+        
+        EnemyBullet bulletInstance = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+        bulletInstance.Shoot(ownerEnemy.GetDamage(), direction, ownerEnemy.GetBulletSpeed());
         gizmoDirection = direction;
     }
     

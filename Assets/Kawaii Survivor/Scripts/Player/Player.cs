@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Components")]
+    [SerializeField] private CircleCollider2D collider;
     private PlayerHealth playerHealth;
 
     private void Awake()
@@ -26,4 +27,10 @@ public class Player : MonoBehaviour
     {
         playerHealth.TakeDamage(damage);
     }
+
+    public Vector2 GetCenter()
+    {
+        return collider.bounds.center;
+    }
+    
 }

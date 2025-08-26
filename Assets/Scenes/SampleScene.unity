@@ -523,7 +523,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 1.8}
+  m_Offset: {x: 0, y: 2.05}
   m_Radius: 2
 --- !u!114 &236127371
 MonoBehaviour:
@@ -537,6 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5400a42753377b94881011d0d3dfbf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 236127370}
 --- !u!114 &236127372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2162,6 +2163,7 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
+  enableGizmos: 0
 --- !u!4 &1522905156
 Transform:
   m_ObjectHideFlags: 0
@@ -4707,14 +4709,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 709562943}
     m_Modifications:
-    - target: {fileID: 570036179270816780, guid: 28fb3f5a208a25b42ae5c730053ab4fc, type: 3}
-      propertyPath: gizmos
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 570036179270816780, guid: 28fb3f5a208a25b42ae5c730053ab4fc, type: 3}
-      propertyPath: attackRadius
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1540804400436223201, guid: 28fb3f5a208a25b42ae5c730053ab4fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.76
