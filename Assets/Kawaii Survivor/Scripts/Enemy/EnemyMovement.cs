@@ -10,8 +10,6 @@ public class EnemyMovement : MonoBehaviour
  
     void Update()
     {
-        if(player != null)
-            FollowPlayer();
     }
 
     public void SetPlayer(Player inPlayer)
@@ -19,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
         this.player = inPlayer;
     }
 
-    private void FollowPlayer()
+    public void FollowPlayer()
     {
         Vector2 direction = (player.transform.position - this.transform.position).normalized;
         Vector2 targetPosition = (Vector2)transform.position + direction * moveSpeed * Time.deltaTime;
