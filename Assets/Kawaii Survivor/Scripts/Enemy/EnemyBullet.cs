@@ -4,7 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class EnemyBullet : MonoBehaviour
 {
-    [Header("Bullet Elements")] private Rigidbody2D rigidbody;
+    [Header("Bullet Elements")] 
+    private Rigidbody2D rigidbody;
     private int damage;
     private RangedEnemyAttack rangedEnemyAttack;
     private Collider2D bulletCollider;
