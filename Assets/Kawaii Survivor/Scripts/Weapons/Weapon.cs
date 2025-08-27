@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -51,6 +52,17 @@ public abstract class Weapon : MonoBehaviour
     protected void Wait()
     {
         attackTimer  += Time.deltaTime;
+    }
+
+    protected int GetDamage(out bool isCritical)
+    {
+        isCritical = false;
+        if (Random.Range(0, 101) <= 50)
+        {
+            isCritical = true;
+            return damage * 2;
+        }
+        return damage;
     }
 
     protected void OnDrawGizmosSelected()

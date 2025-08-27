@@ -20,9 +20,11 @@ public class DamageText : MonoBehaviour
         
     }
 
-    public void Animate(int damage)
+    public void Animate(int damage, bool isCritical)
     {
         damageText.text = damage.ToString();
+        damageText.color = isCritical ? Color.red : Color.white;
+        
         animator.Play("DamageText");
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class RangedWeapon : Weapon
 {
@@ -9,16 +10,49 @@ public class RangedWeapon : Weapon
     [Header("Settings")]
     [SerializeField] private float bulletSpeed;
     
+    [Header("Pooling")]
+    protected ObjectPool<Bullet> bulletPool;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         base.Start();
+        bulletPool = new ObjectPool<Bullet>(CreateFunction, ActionOnGet, ActionOnRelease, ActionOnDestroy);
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         AutoAim();
+    }
+    
+    Bullet CreateFunction()
+    {
+        Bullet bulletInstance = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+        bulletInstance.Configure(this);
+        return bulletInstance;
+    }
+    
+    private void ActionOnGet(Bullet bullet)
+    {
+        bullet.Reload();
+        bullet.transform.position = shootingPoint.position;
+        bullet.gameObject.SetActive(true);
+    }
+    
+    private void ActionOnRelease(Bullet bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+    
+    private void ActionOnDestroy(Bullet bullet)
+    {
+        Destroy(bullet.gameObject);
+    }
+
+    public void ReleaseBullet(Bullet bullet)
+    {
+        bulletPool.Release(bullet);
     }
     
     protected void AutoAim()
@@ -48,7 +82,10 @@ public class RangedWeapon : Weapon
 
     private void Shoot()
     {
-        Bullet bulletInstance = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
-        bulletInstance.Shoot(damage, transform.up, bulletSpeed);
+        int hitDamage = GetDamage(out bool isCritical);
+        
+        Bullet bulletInstance = bulletPool.Get();
+        bulletInstance.Shoot(hitDamage, transform.up, bulletSpeed, isCritical);
     }
+    
 }

@@ -35,7 +35,7 @@ public abstract class Enemy : MonoBehaviour
     protected float attackTimer;
 
     [Header("Actions")] 
-    public static Action<int, Vector2> onDamageTaken;
+    public static Action<int, Vector2, bool> onDamageTaken;
     
     [Header("DEBUG")]
     [SerializeField] protected bool gizmos;
@@ -104,11 +104,11 @@ public abstract class Enemy : MonoBehaviour
         spawnIndicator.enabled = !visible;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isCritical)
     {
         int realDamage = Mathf.Min(damage, currentHealth); 
         currentHealth -= realDamage;
-        onDamageTaken?.Invoke(damage, transform.position);
+        onDamageTaken?.Invoke(damage, transform.position, isCritical);
         
         if (currentHealth <= 0)
         {

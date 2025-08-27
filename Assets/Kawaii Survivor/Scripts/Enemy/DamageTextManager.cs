@@ -31,13 +31,13 @@ public class DamageTextManager : MonoBehaviour
         
     }
 
-    private void EnemyHitCallback(int damage, Vector2 enemyPosition)
+    private void EnemyHitCallback(int damage, Vector2 enemyPosition, bool isCritical)
     {
         DamageText damageTextIntance = damageTextPool.Get();
         Vector3 spawnPosition = enemyPosition + Vector2.up * 1.5f;
         damageTextIntance.transform.position = spawnPosition;
 
-        damageTextIntance.Animate(damage);
+        damageTextIntance.Animate(damage, isCritical);
 
         LeanTween.delayedCall(1, () => damageTextPool.Release(damageTextIntance));
     }
