@@ -36,6 +36,7 @@ public abstract class Enemy : MonoBehaviour
 
     [Header("Actions")] 
     public static Action<int, Vector2, bool> onDamageTaken;
+    public static Action<Vector2> onDie;
     
     [Header("DEBUG")]
     [SerializeField] protected bool gizmos;
@@ -93,6 +94,8 @@ public abstract class Enemy : MonoBehaviour
     
     protected void PlayDeathAnimation()
     {
+        onDie.Invoke(transform.position);
+        
         dieParticles.transform.SetParent(null);
         dieParticles.Play();
         Destroy(this.gameObject);
