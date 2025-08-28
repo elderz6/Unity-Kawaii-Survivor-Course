@@ -2750,11 +2750,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1310e4d678a2ca344b774b104cfeebd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveDuration: 30
+  player: {fileID: 236127371}
+  waveDuration: 10
   waves:
   - name: 1
     segments:
     - timeStartEnd: {x: 0, y: 33}
+      spawnRate: 1
+      prefab: {fileID: 4220113435490129617, guid: 20667856e19a510499cbc377f4b156fe, type: 3}
+      counter: 0
+    - timeStartEnd: {x: 66.99999, y: 100}
+      spawnRate: 1
+      prefab: {fileID: 5332771576387427328, guid: 28fb3f5a208a25b42ae5c730053ab4fc, type: 3}
+      counter: 0
+  - name: 2
+    segments:
+    - timeStartEnd: {x: 0, y: 40}
+      spawnRate: 1
+      prefab: {fileID: 5332771576387427328, guid: 28fb3f5a208a25b42ae5c730053ab4fc, type: 3}
+      counter: 0
+    - timeStartEnd: {x: 40, y: 100}
       spawnRate: 1
       prefab: {fileID: 4220113435490129617, guid: 20667856e19a510499cbc377f4b156fe, type: 3}
       counter: 0

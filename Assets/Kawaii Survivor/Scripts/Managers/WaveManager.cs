@@ -4,29 +4,49 @@ using NaughtyAttributes;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Settings")]
+    [Header("Settings")] 
+    [SerializeField] private Player player;
     [SerializeField] private float waveDuration;
     private float waveTimer;
+    private int currentWaveIndex = 0;
+    private bool isTimerRunning = false;
     
     [Header("Waves")]
     [SerializeField] private Wave[] waves;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartWave(currentWaveIndex);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(waveTimer < waveDuration)
+        if (!isTimerRunning) return;
+        if (waveTimer < waveDuration)
             ManageCurrentWave();
+        else
+            StartWaveTransition();
+    }
+
+    private void StartWaveTransition()
+    {
+        isTimerRunning = false;
+        currentWaveIndex++;
+        waveTimer = 0;
         
+        if(currentWaveIndex >= waves.Length) return;
+        StartWave(currentWaveIndex);
+    }
+
+    private void StartWave(int waveIndex)
+    {
+        isTimerRunning = true;
     }
 
     private void ManageCurrentWave()
     {
-        Wave currentWave = waves[0];
+        Wave currentWave = waves[currentWaveIndex];
 
         for (int i = 0; i < currentWave.segments.Count; i++)
         {
@@ -43,11 +63,22 @@ public class WaveManager : MonoBehaviour
 
             if (timeSinceSegmentStart / spawnDelay > currentWaveSegment.counter)
             {
-                Instantiate(currentWaveSegment.prefab, Vector2.zero, Quaternion.identity, transform);
+                Instantiate(currentWaveSegment.prefab, GetSpawnPosition(), Quaternion.identity, transform);
                 currentWaveSegment.counter += 1;
             }
         }
         waveTimer += Time.deltaTime;
+    }
+
+    private Vector2 GetSpawnPosition()
+    {
+        Vector2 direction = Random.onUnitSphere;
+        Vector2 offset = direction.normalized * Random.Range(8, 10);
+        Vector2 targetPos = (Vector2)player.transform.position + offset;
+
+        targetPos.x = Mathf.Clamp(targetPos.x, -18, 18);
+        targetPos.y = Mathf.Clamp(targetPos.y, -10, 10);
+        return targetPos;
     }
 }
 
