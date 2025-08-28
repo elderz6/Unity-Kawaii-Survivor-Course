@@ -1,15 +1,15 @@
-using System.Collections;
 using UnityEngine;
 using System;
 
-public class Candy : DroppableItem
+public class Cash : DroppableItem
 {
     [Header("Actions")]
-    public static Action<Candy> onCollected;
+    public static Action<Cash> onCollected;
     
     protected override void Collected()
     {
         onCollected?.Invoke(this);
     }
+
 
 }
