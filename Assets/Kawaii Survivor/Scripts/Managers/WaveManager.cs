@@ -35,7 +35,8 @@ public class WaveManager : MonoBehaviour
             ui.UpdateTimerText(timerString);
         }
         else
-            StartWaveTransition();
+            GameManager.instance.WaveCompletedCallback();
+        // StartWaveTransition();
     }
 
     private void StartWaveTransition()

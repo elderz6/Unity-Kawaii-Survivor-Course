@@ -12,6 +12,7 @@ public class PlayerLevel : MonoBehaviour
     private int requiredEXP;
     private int currentEXP;
     private int level = 1;
+    private int timesLeveledUp = 0;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class PlayerLevel : MonoBehaviour
     private void LevelUp()
     {
         level++;
+        timesLeveledUp++;
         currentEXP = 0;
         UpdateRequiredEXP();
     }
@@ -62,5 +64,15 @@ public class PlayerLevel : MonoBehaviour
             LevelUp();
         
         UpdateVisuals();
+    }
+
+    public bool HasLeveledUp()
+    {
+        if (timesLeveledUp > 0)
+        {
+            timesLeveledUp--;
+            return true;
+        }
+        return false;
     }
 }
