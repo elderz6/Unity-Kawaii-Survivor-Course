@@ -2,10 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
+[RequireComponent(typeof(WaveManagerUI))]
 public class WaveManager : MonoBehaviour
 {
-    [Header("Settings")] 
+    [Header("Elements")] 
     [SerializeField] private Player player;
+    private WaveManagerUI ui;
+    
+    [Header("Settings")] 
     [SerializeField] private float waveDuration;
     private float waveTimer;
     private int currentWaveIndex = 0;
@@ -16,6 +20,7 @@ public class WaveManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ui = GetComponent<WaveManagerUI>();
         StartWave(currentWaveIndex);
     }
 
@@ -24,7 +29,11 @@ public class WaveManager : MonoBehaviour
     {
         if (!isTimerRunning) return;
         if (waveTimer < waveDuration)
+        {
             ManageCurrentWave();
+            string timerString = ((int)(waveDuration - waveTimer)).ToString();
+            ui.UpdateTimerText(timerString);
+        }
         else
             StartWaveTransition();
     }
@@ -34,13 +43,19 @@ public class WaveManager : MonoBehaviour
         isTimerRunning = false;
         currentWaveIndex++;
         waveTimer = 0;
-        
-        if(currentWaveIndex >= waves.Length) return;
+
+        if (currentWaveIndex >= waves.Length)
+        {
+            ui.UpdateTimerText("");
+            ui.UpdateWaveText("Stage completed");
+            return;
+        }
         StartWave(currentWaveIndex);
     }
 
     private void StartWave(int waveIndex)
     {
+        ui.UpdateWaveText("Wave " + (currentWaveIndex + 1) + " / " + waves.Length);
         isTimerRunning = true;
     }
 
