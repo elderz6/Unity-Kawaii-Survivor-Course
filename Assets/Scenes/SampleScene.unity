@@ -3983,6 +3983,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candyPrefab: {fileID: 1745237632429393023, guid: 504cb57c8c7e07a428d27724660c5821, type: 3}
   cashPrefab: {fileID: 1745237632429393023, guid: b2529b254f35c1a41805706d62f0bc92, type: 3}
+  chestPrefab: {fileID: 1745237632429393023, guid: 30b917634f7fbf84dac54e113f620cac, type: 3}
+  cashDropChance: 10
+  chestDropChance: 10
 --- !u!1 &1847006181
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,14 @@ using Random = UnityEngine.Random;
 public class DropsManager : MonoBehaviour
 {
     [Header("Elements")] 
-    [SerializeField] private Dictionary<Type, GameObject> prefabList = new Dictionary<Type, GameObject>();
+    private Dictionary<Type, GameObject> prefabList = new Dictionary<Type, GameObject>();
     [SerializeField] private GameObject candyPrefab;
     [SerializeField] private GameObject cashPrefab;
+    [SerializeField] private GameObject chestPrefab;
+    
+    [Header("Settings")]
+    [SerializeField] [Range(0, 100)]private int cashDropChance;
+    [SerializeField] [Range(0, 100)]private int chestDropChance;
 
     [Header("Pool")] 
     private Dictionary<Type, ObjectPool<DroppableItem>> itemPools = new Dictionary<Type, ObjectPool<DroppableItem>>();
@@ -34,10 +39,18 @@ public class DropsManager : MonoBehaviour
   
     private void EnemyDiedCallback(Vector2 enemyPos)
     {
-        bool shouldSpawnCash = Random.Range(0, 100) <= 20;
+        bool shouldSpawnCash = Random.Range(0, 100) <= cashDropChance;
         DroppableItem droppableItem = shouldSpawnCash ? itemPools[typeof(Cash)].Get() : itemPools[typeof(Candy)].Get();
         droppableItem.transform.position = enemyPos;
         //Instantiate(droppableItem, enemyPos, Quaternion.identity, transform);
+        TrySpawnChest(enemyPos);
+    }
+
+    private void TrySpawnChest(Vector2 position)
+    {
+        bool shouldSpawnChest = Random.Range(0, 100) <= chestDropChance;
+        if(!shouldSpawnChest) return;
+        Instantiate(chestPrefab, position, Quaternion.identity, transform);
     }
 
     void Start()
