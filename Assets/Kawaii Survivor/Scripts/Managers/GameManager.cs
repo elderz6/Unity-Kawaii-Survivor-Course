@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,29 +22,16 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.MENU);
     }
 
-    public void StartGame()
-    {
-        Debug.Log("Starting Game");
-        SetGameState(GameState.GAME);
-    }
-
-    public void StartShop()
-    {
-        Debug.Log("StartShop");
-        SetGameState(GameState.SHOP);
-    }
+    public void StartGame() => SetGameState(GameState.GAME);
+    public void StartWeaponSelect() => SetGameState(GameState.WEAPONSELECTION);
+    public void StartShop() => SetGameState(GameState.SHOP);
 
     public void WaveCompletedCallback()
     {
-        Debug.Log("Wave Completed Level up " + Player.instance.HasLeveledUp());
         if (Player.instance.HasLeveledUp())
-        {
             SetGameState(GameState.WAVETRANSITION);
-        }
         else
-        {
             SetGameState(GameState.SHOP);
-        }
     }
 
     public void SetGameState(GameState state)
@@ -53,6 +41,11 @@ public class GameManager : MonoBehaviour
 
         foreach (IGameStateListener gameStateListener in gameStateListeners)
             gameStateListener.GameStateChangedCallback(state);
+    }
+
+    public void ManageGameOver()
+    {
+        SceneManager.LoadScene(0);
     }
 }
 

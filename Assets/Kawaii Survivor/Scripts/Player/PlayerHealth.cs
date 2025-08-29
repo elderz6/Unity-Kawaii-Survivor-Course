@@ -32,9 +32,12 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= realDamage;
         
         UpdateHealthUI();
-        if (currentHealth <= 0)
-        {
-        }
+        if (currentHealth <= 0) Die();
+    }
+
+    private void Die()
+    {
+        GameManager.instance.SetGameState(GameState.GAMEOVER);
     }
 
     private void UpdateHealthUI()

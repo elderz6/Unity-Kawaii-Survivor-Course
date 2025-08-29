@@ -6,7 +6,10 @@ public class UIManager : MonoBehaviour, IGameStateListener
 {
     [Header("Panels")]
     [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject weaponSelectionPanel;
     [SerializeField] private GameObject gamePanel;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject stageCompletePanel;
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private GameObject waveTransitionPanel;
     
@@ -15,19 +18,8 @@ public class UIManager : MonoBehaviour, IGameStateListener
     private void Awake()
     {
         menuPanels.AddRange(new GameObject[] 
-            { menuPanel, gamePanel, shopPanel, waveTransitionPanel });
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+            { menuPanel, gamePanel, shopPanel, waveTransitionPanel, 
+                gameOverPanel, stageCompletePanel, weaponSelectionPanel });
     }
 
     public void GameStateChangedCallback(GameState state)
@@ -37,8 +29,17 @@ public class UIManager : MonoBehaviour, IGameStateListener
             case GameState.MENU:
                 EnablePanel(menuPanel);
                 break;
+            case GameState.WEAPONSELECTION:
+                EnablePanel(weaponSelectionPanel);
+                break;
             case GameState.GAME:
                 EnablePanel(gamePanel);
+                break;      
+            case GameState.GAMEOVER:
+                EnablePanel(gameOverPanel);
+                break;
+            case GameState.STAGECOMPLETE:
+                EnablePanel(stageCompletePanel);
                 break;
             case GameState.SHOP:
                 EnablePanel(shopPanel);

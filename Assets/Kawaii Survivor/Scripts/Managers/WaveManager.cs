@@ -39,12 +39,7 @@ public class WaveManager : MonoBehaviour, IGameStateListener
             string timerString = ((int)(waveDuration - waveTimer)).ToString();
             ui.UpdateTimerText(timerString);
         }
-        else if (FindFirstObjectByType<Enemy>() == null)
-        {
-            GameManager.instance.WaveCompletedCallback();
-            isTimerRunning = false;
-        }
-        // StartWaveTransition();
+        else if (FindFirstObjectByType<Enemy>() == null) StartWaveTransition();
     }
 
     private void StartWaveTransition()
@@ -57,7 +52,10 @@ public class WaveManager : MonoBehaviour, IGameStateListener
         {
             ui.UpdateTimerText("");
             ui.UpdateWaveText("Stage completed");
+            GameManager.instance.SetGameState(GameState.STAGECOMPLETE);
         }
+        else 
+            GameManager.instance.WaveCompletedCallback();
     }
 
     private void StartWave(int waveIndex)
@@ -117,12 +115,9 @@ public class WaveManager : MonoBehaviour, IGameStateListener
             case GameState.GAME:
                 StartNextWave();
                 break;
-            case GameState.SHOP:
-                StartWaveTransition();
-                break;
-            case GameState.WAVETRANSITION:
-                StartWaveTransition();
-                break;
+           case GameState.GAMEOVER:
+               isTimerRunning = false;
+               break;
         }
     }
 }
