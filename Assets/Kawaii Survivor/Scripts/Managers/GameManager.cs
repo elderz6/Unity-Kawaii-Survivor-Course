@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,23 +18,46 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        SetGameState(GameState.MENU);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGame()
     {
-        
+        Debug.Log("Starting Game");
+        SetGameState(GameState.GAME);
+    }
+
+    public void StartShop()
+    {
+        Debug.Log("StartShop");
+        SetGameState(GameState.SHOP);
     }
 
     public void WaveCompletedCallback()
     {
+        Debug.Log("Wave Completed Level up " + Player.instance.HasLeveledUp());
         if (Player.instance.HasLeveledUp())
         {
-            Debug.Log("Level up");
+            SetGameState(GameState.WAVETRANSITION);
         }
         else
         {
-            Debug.Log("display shop");
+            SetGameState(GameState.SHOP);
         }
     }
+
+    public void SetGameState(GameState state)
+    {
+        IEnumerable<IGameStateListener> gameStateListeners =
+            FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IGameStateListener>();
+
+        foreach (IGameStateListener gameStateListener in gameStateListeners)
+            gameStateListener.GameStateChangedCallback(state);
+    }
+}
+
+
+public interface IGameStateListener
+{
+    void GameStateChangedCallback(GameState state);
 }

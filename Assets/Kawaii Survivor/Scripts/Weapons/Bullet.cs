@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         bulletCollider =  GetComponent<Collider2D>();
 
-      // LeanTween.delayedCall(gameObject, 5, () => rangedEnemyAttack.ReleaseBullet(this));
+       LeanTween.delayedCall(gameObject, 5, () => Release());
     }
     
     void Start()

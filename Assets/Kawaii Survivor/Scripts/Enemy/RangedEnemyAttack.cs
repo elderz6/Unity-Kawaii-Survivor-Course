@@ -49,12 +49,6 @@ public class RangedEnemyAttack : MonoBehaviour
         bulletPool.Release(bullet);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetPlayer(Player inPLayer)
     {
         player = inPLayer;

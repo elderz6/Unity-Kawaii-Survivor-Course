@@ -15,7 +15,6 @@ public class EnemyBullet : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         bulletCollider =  GetComponent<Collider2D>();
 
-        LeanTween.delayedCall(gameObject, 5, () => rangedEnemyAttack.ReleaseBullet(this));
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,6 +43,8 @@ public class EnemyBullet : MonoBehaviour
     public void Shoot(int inDamage, Vector2 direction, int moveSpeed)
     {
         damage = inDamage;
+        LeanTween.delayedCall(gameObject, 5, () => rangedEnemyAttack.ReleaseBullet(this));
+        
         transform.right = direction;
         rigidbody.linearVelocity = direction * moveSpeed;
     }

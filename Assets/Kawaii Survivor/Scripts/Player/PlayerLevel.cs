@@ -39,7 +39,7 @@ public class PlayerLevel : MonoBehaviour
 
     private void UpdateRequiredEXP()
     {
-        requiredEXP = level * 5;
+        requiredEXP = level * 1;
     }
 
     private void UpdateVisuals()
@@ -68,7 +68,7 @@ public class PlayerLevel : MonoBehaviour
 
     public bool HasLeveledUp()
     {
-        if (timesLeveledUp > 0)
+        if (timesLeveledUp >= 0)
         {
             timesLeveledUp--;
             return true;

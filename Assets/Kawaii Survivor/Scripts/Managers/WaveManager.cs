@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(WaveManagerUI))]
-public class WaveManager : MonoBehaviour
+public class WaveManager : MonoBehaviour, IGameStateListener
 {
     [Header("Elements")] 
     [SerializeField] private Player player;
@@ -20,8 +22,11 @@ public class WaveManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+    }
+
+    private void Awake()
+    {
         ui = GetComponent<WaveManagerUI>();
-        StartWave(currentWaveIndex);
     }
 
     // Update is called once per frame
@@ -34,8 +39,11 @@ public class WaveManager : MonoBehaviour
             string timerString = ((int)(waveDuration - waveTimer)).ToString();
             ui.UpdateTimerText(timerString);
         }
-        else
+        else if (FindFirstObjectByType<Enemy>() == null)
+        {
             GameManager.instance.WaveCompletedCallback();
+            isTimerRunning = false;
+        }
         // StartWaveTransition();
     }
 
@@ -49,14 +57,12 @@ public class WaveManager : MonoBehaviour
         {
             ui.UpdateTimerText("");
             ui.UpdateWaveText("Stage completed");
-            return;
         }
-        StartWave(currentWaveIndex);
     }
 
     private void StartWave(int waveIndex)
     {
-        ui.UpdateWaveText("Wave " + (currentWaveIndex + 1) + " / " + waves.Length);
+        ui.UpdateWaveText("Wave " + (waveIndex + 1) + " / " + waves.Length);
         isTimerRunning = true;
     }
 
@@ -95,6 +101,29 @@ public class WaveManager : MonoBehaviour
         targetPos.x = Mathf.Clamp(targetPos.x, -18, 18);
         targetPos.y = Mathf.Clamp(targetPos.y, -10, 10);
         return targetPos;
+    }
+
+    private void StartNextWave()
+    {
+        StartWave(currentWaveIndex);
+    }
+    
+    public void GameStateChangedCallback(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.MENU:
+                break;
+            case GameState.GAME:
+                StartNextWave();
+                break;
+            case GameState.SHOP:
+                StartWaveTransition();
+                break;
+            case GameState.WAVETRANSITION:
+                StartWaveTransition();
+                break;
+        }
     }
 }
 
