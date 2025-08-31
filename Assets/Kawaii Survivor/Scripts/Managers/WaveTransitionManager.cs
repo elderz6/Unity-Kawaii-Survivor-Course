@@ -8,7 +8,7 @@ using NaughtyAttributes;
 public class WaveTransitionManager : MonoBehaviour, IGameStateListener
 {
     [Header("Elements")]
-    [SerializeField] private Button[] upgradeContainers;
+    [SerializeField] private UpgradeContainer[] upgradeContainers;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,15 +34,15 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     [NaughtyAttributes.Button]
     private void ConfigureUpgradeContainers()
     {
-        foreach (Button upgradeContainer in upgradeContainers)
+        foreach (UpgradeContainer upgradeContainer in upgradeContainers)
         {
             int randomIndex = Random.Range(0, Enum.GetValues(typeof(Stat)).Length);
             Stat stat = (Stat)Enum.GetValues(typeof(Stat)).GetValue(randomIndex);
             string randomStatString = Enums.FormatStatName(stat);
             
-            upgradeContainer.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = randomStatString;
-            upgradeContainer.onClick.RemoveAllListeners();
-            upgradeContainer.onClick.AddListener(() => Debug.Log(randomStatString));
+            upgradeContainer.Configure(null, randomStatString, Random.Range(1, 10).ToString());
+            upgradeContainer.Button.onClick.RemoveAllListeners();
+            upgradeContainer.Button.onClick.AddListener(() => Debug.Log(randomStatString));
         }
     }
 }
