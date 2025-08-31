@@ -14,7 +14,7 @@ public class DamageTextManager : MonoBehaviour
         Enemy.onDamageTaken += EnemyHitCallback;
     }
 
-    private void onDestroy()
+    private void OnDestroy()
     {
         Enemy.onDamageTaken -= EnemyHitCallback;
     }
