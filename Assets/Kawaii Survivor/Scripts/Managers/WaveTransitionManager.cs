@@ -1,9 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using Random = UnityEngine.Random;
-using NaughtyAttributes;
 
 public class WaveTransitionManager : MonoBehaviour, IGameStateListener
 {

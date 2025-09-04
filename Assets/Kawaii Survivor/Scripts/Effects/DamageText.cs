@@ -7,22 +7,9 @@ public class DamageText : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private TextMeshPro damageText;
 
- 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Animate(string damage, bool isCritical)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Animate(int damage, bool isCritical)
-    {
-        damageText.text = damage.ToString();
+        damageText.text = damage;
         damageText.color = isCritical ? Color.red : Color.white;
         
         animator.Play("DamageText");

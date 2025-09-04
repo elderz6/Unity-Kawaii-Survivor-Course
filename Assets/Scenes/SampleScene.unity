@@ -893,7 +893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 236127366}
   mobileJoystick: {fileID: 678081920}
-  moveSpeed: 3
+  baseMoveSpeed: 3
 --- !u!58 &236127370
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3138,7 +3138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &612298886
 Transform:
   m_ObjectHideFlags: 0
@@ -4954,7 +4954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 236127371}
-  waveDuration: 5
+  waveDuration: 20
   waves:
   - name: 1
     segments:
