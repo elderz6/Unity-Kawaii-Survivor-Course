@@ -2,10 +2,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IPlayerStatsDependency
 {
     [Header("Settings")]
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int baseMaxHealth;
+    private int maxHealth;
     private int currentHealth;
     
     [Header("Elements")]
@@ -16,8 +17,7 @@ public class PlayerHealth : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentHealth = maxHealth;
-        UpdateHealthUI();
+    
     }
 
     // Update is called once per frame
@@ -44,5 +44,14 @@ public class PlayerHealth : MonoBehaviour
     {
         healthSlider.value = (float)currentHealth/maxHealth;
         healthText.text = currentHealth + " / "  + maxHealth;;
+    }
+
+    public void UpdateStats(PlayerStatsManager playerStatsManager)
+    {
+        float addedHealth = playerStatsManager.GetStatValue(Stat.MaxHealth);
+        maxHealth = baseMaxHealth += (int)addedHealth;
+        maxHealth = Mathf.Max(maxHealth, 1);
+        currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 }
