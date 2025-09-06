@@ -35,17 +35,10 @@ public class PlayerHealth : MonoBehaviour, IPlayerStatsDependency
             RecoverHealth();
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void OnDestroy()
     {
         Enemy.onDamageTaken -= EnemyTookDamageCallback;
     }
-    
-    
     
     private void EnemyTookDamageCallback(int damage, Vector2 enemyPos, bool bIsCritical)
     {
@@ -99,7 +92,7 @@ public class PlayerHealth : MonoBehaviour, IPlayerStatsDependency
     private void UpdateHealthUI()
     {
         healthSlider.value = currentHealth/maxHealth;
-        healthText.text = (int)currentHealth + " / "  + maxHealth;;
+        healthText.text = (int)currentHealth + " / "  + maxHealth;
     }
 
     public void UpdateStats(PlayerStatsManager playerStatsManager)

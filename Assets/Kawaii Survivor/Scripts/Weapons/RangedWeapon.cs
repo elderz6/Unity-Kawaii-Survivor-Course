@@ -25,7 +25,7 @@ public class RangedWeapon : Weapon
     {
         AutoAim();
     }
-    
+
     Bullet CreateFunction()
     {
         Bullet bulletInstance = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
@@ -88,4 +88,15 @@ public class RangedWeapon : Weapon
         bulletInstance.Shoot(hitDamage, transform.up, bulletSpeed, isCritical);
     }
     
+    public override void UpdateStats(PlayerStatsManager playerStatsManager)
+    {
+        ConfigureStats();
+        
+        damage = (int)(damage * (1 + playerStatsManager.GetStatValue(Stat.Attack) / 100));
+        attackDelay /= 1 + (playerStatsManager.GetStatValue(Stat.AttackSpeed) / 100);
+        criticalChance = Mathf.RoundToInt(criticalChance * (1 + playerStatsManager.GetStatValue(Stat.CriticalChance) / 100));
+        criticalDamage += playerStatsManager.GetStatValue(Stat.CriticalDamage);
+        range += playerStatsManager.GetStatValue(Stat.Range) / 10;
+    }
+
 }

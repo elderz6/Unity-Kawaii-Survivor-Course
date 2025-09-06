@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour, IPlayerStatsDependency
 {
+    [field: SerializeField] public WeaponDataSO WeaponData { get; private set; }
+    
     [Header("Attack")]
     [SerializeField] protected int damage;
     protected List<Enemy> damagedEnemies = new List<Enemy>();
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float attackTimer;
     
+    [Header("Critical")]
+    protected int criticalChance;
+    protected float criticalDamage;
+    
     [Header("Settings")]
     [SerializeField] protected float range;
     [SerializeField] protected float aimLerpSpeed;
     [SerializeField] protected LayerMask enemyMask;
+    
+    [Header("Level")]
+    [field: SerializeField] public int Level { get; private set; }
     
     [Header("Debug")]
     [SerializeField] protected bool enableGizmos;
@@ -57,10 +66,10 @@ public abstract class Weapon : MonoBehaviour
     protected int GetDamage(out bool isCritical)
     {
         isCritical = false;
-        if (Random.Range(0, 101) <= 50)
+        if (Random.Range(0, 101) <= criticalChance)
         {
             isCritical = true;
-            return damage * 2;
+            return Mathf.RoundToInt(damage * criticalDamage);
         }
         return damage;
     }
@@ -71,4 +80,18 @@ public abstract class Weapon : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
     }
+
+    protected void ConfigureStats()
+    {
+        float multiplier = 1 + (float)Level / 3;
+        damage = Mathf.RoundToInt(WeaponData.GetStatValue(Stat.Attack) * multiplier);
+        attackDelay = 1f / (WeaponData.GetStatValue(Stat.AttackSpeed) * multiplier);
+        criticalChance = Mathf.RoundToInt(WeaponData.GetStatValue(Stat.CriticalChance) * multiplier);
+        criticalDamage = WeaponData.GetStatValue(Stat.CriticalDamage) * multiplier;
+
+        if (WeaponData.Prefab.GetType() == typeof(RangedWeapon))
+            range = WeaponData.GetStatValue(Stat.Range) * multiplier;
+    }
+
+    public abstract void UpdateStats(PlayerStatsManager playerStatsManager);
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <Sprite>k__BackingField: {fileID: 0}
   <PurchasePrice>k__BackingField: 0
-  attack: 0
+  attack: 200
   attackSpeed: 1
   criticalChance: -1
   criticalDamage: 0

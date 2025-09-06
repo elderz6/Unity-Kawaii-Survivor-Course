@@ -36,7 +36,17 @@ public class MeleeWeapon : Weapon
                 break;
         }
     }
-    
+
+    public override void UpdateStats(PlayerStatsManager playerStatsManager)
+    {
+        ConfigureStats();
+        
+        damage = (int)(damage * (1 + playerStatsManager.GetStatValue(Stat.Attack) / 100));
+        attackDelay /= 1 + (playerStatsManager.GetStatValue(Stat.AttackSpeed) / 100);
+        criticalChance = Mathf.RoundToInt(criticalChance * (1 + playerStatsManager.GetStatValue(Stat.CriticalChance) / 100));
+        criticalDamage += playerStatsManager.GetStatValue(Stat.CriticalDamage);
+    }
+
     protected virtual void AutoAim()
     {
         Enemy closestEnemy = FindClosestEnemy();
