@@ -5,17 +5,9 @@ public class WeaponSelectionManager : MonoBehaviour, IGameStateListener
     [Header("Elements")]
     [SerializeField] private Transform containersParent;
     [SerializeField] private WeaponSelectionContainer weaponContainerPrefab;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
+    [Header("Data")]
+    [SerializeField] private WeaponDataSO[] starterWeapons;
 
     public void GameStateChangedCallback(GameState state)
     {
@@ -41,5 +33,19 @@ public class WeaponSelectionManager : MonoBehaviour, IGameStateListener
     private void GenerateWeaponContainer()
     {
         WeaponSelectionContainer containerInstance = Instantiate(weaponContainerPrefab, containersParent);
+        WeaponDataSO weaponData = starterWeapons[Random.Range(0, starterWeapons.Length)];
+        containerInstance.Configure(weaponData.Sprite, weaponData.Name);
+        
+        containerInstance.Button.onClick.RemoveAllListeners();
+        containerInstance.Button.onClick.AddListener(() => WeaponSelectedCallback(containerInstance, weaponData));
+    }
+
+    private void WeaponSelectedCallback(WeaponSelectionContainer containerInstance, WeaponDataSO weaponData)
+    {
+        foreach (WeaponSelectionContainer container in containersParent.GetComponentsInChildren<WeaponSelectionContainer>())
+        {
+            if (container == containerInstance) container.Select();
+            else container.Deselect();
+        }
     }
 }

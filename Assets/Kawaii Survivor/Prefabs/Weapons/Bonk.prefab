@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2e08e73cb163b4d8c6f2d2fa6a8894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <WeaponData>k__BackingField: {fileID: 0}
+  <WeaponData>k__BackingField: {fileID: 11400000, guid: 7436e3cb095ec8842a057b0b81679749, type: 2}
   damage: 0
   attackDelay: 1
   attackTimer: 1

@@ -3315,6 +3315,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   containersParent: {fileID: 222355936}
   weaponContainerPrefab: {fileID: -7317790260272480179, guid: ad6b76f94f455234aad53a6c94737aad, type: 3}
+  starterWeapons:
+  - {fileID: 11400000, guid: 43debed3a3b0770469314cd2ecbd3f1d, type: 2}
+  - {fileID: 11400000, guid: 7436e3cb095ec8842a057b0b81679749, type: 2}
 --- !u!1 &671292420
 GameObject:
   m_ObjectHideFlags: 0
