@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <WeaponData>k__BackingField: {fileID: 11400000, guid: 43debed3a3b0770469314cd2ecbd3f1d, type: 2}
-  damage: 0
+  damage: 5
   attackDelay: 0.5
   attackTimer: 0.2
   range: 5

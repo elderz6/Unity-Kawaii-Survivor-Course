@@ -144,7 +144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 2a4184e28f358444783fe45f46c0a1ac, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -213,6 +213,8 @@ MonoBehaviour:
   icon: {fileID: 3198719119016349921}
   nameText: {fileID: 3584694600556180059}
   <Button>k__BackingField: {fileID: 4182406742105363931}
+  levelImages:
+  - {fileID: 2095344245346745267}
 --- !u!1 &8858042534984730905
 GameObject:
   m_ObjectHideFlags: 0
