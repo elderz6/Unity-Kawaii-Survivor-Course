@@ -93,5 +93,11 @@ public abstract class Weapon : MonoBehaviour, IPlayerStatsDependency
             range = WeaponData.GetStatValue(Stat.Range) * multiplier;
     }
 
+    public void UpgradeTo(int targetLevel)
+    {
+        Level = targetLevel;
+        ConfigureStats();
+    }
+
     public abstract void UpdateStats(PlayerStatsManager playerStatsManager);
 }

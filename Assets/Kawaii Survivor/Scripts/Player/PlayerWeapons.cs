@@ -16,8 +16,8 @@ public class PlayerWeapons : MonoBehaviour
         
     }
 
-    public void AddWeapon(WeaponDataSO weapon, int level)
+    public void AddWeapon(WeaponDataSO weapon, int weaponLevel)
     {
-        weaponPositions[Random.Range(0, weaponPositions.Length)].AssignWeapon(weapon.Prefab);
+        weaponPositions[Random.Range(0, weaponPositions.Length)].AssignWeapon(weapon.Prefab, weaponLevel);
     }
 }
