@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-public class Chest : MonoBehaviour
+public class Chest : DroppableItem
 {
     [Header("Actions")] 
     public static Action onColleted;
@@ -9,5 +9,10 @@ public class Chest : MonoBehaviour
     {
         onColleted?.Invoke();
         Destroy(gameObject);
+    }
+
+    protected override void Collected()
+    {
+        throw new NotImplementedException();
     }
 }
