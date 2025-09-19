@@ -694,7 +694,6 @@ MonoBehaviour:
   nameText: {fileID: 3584694600556180059}
   <Button>k__BackingField: {fileID: 4182406742105363931}
   statsContainerParent: {fileID: 3686742851998341771}
-  statContainerPrefab: {fileID: 5842877082997675303, guid: 0bf82563e3abedf4c923eab7a0e0c34d, type: 3}
   levelImages:
   - {fileID: 2095344245346745267}
 --- !u!1 &6485245142060027155
@@ -777,7 +776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
