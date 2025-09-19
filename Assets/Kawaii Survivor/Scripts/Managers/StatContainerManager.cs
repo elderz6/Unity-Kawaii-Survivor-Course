@@ -18,9 +18,12 @@ public class StatContainerManager : MonoBehaviour
 
     private void GenerateContainers(Dictionary<Stat, float> statDictionary, Transform parent)
     {
+        List<StatContainer> statContainers = new List<StatContainer>();
+        
         foreach (KeyValuePair<Stat, float> kvp in statDictionary)
         {
             StatContainer containerInstance = Instantiate(statContainer, parent);
+            statContainers.Add(containerInstance);
 
             Sprite weaponIcon = ResourcesManager.GetStatIcon(kvp.Key);
             string statName = Enums.FormatStatName(kvp.Key);
@@ -28,6 +31,24 @@ public class StatContainerManager : MonoBehaviour
             
             containerInstance.Configure(weaponIcon, statName, statValue);
         }
+
+        LeanTween.delayedCall(Time.deltaTime * 2, () => ResizeTexts(statContainers));
+    }
+
+    private void ResizeTexts(List<StatContainer> statContainers)
+    {
+        float minFontSize = 5000;
+
+        for (int i = 0; i < statContainers.Count; i++)
+        {
+            StatContainer statContainer = statContainers[i];
+            float fontSize = statContainer.GetFontSize();
+            
+            if(fontSize < minFontSize) minFontSize = fontSize;
+        }
+
+        foreach (StatContainer statContainer in statContainers)
+            statContainer.SetFontSize(minFontSize);
     }
 
     public static void GenerateStatContainers(Dictionary<Stat, float> statDictionary, Transform parent)
