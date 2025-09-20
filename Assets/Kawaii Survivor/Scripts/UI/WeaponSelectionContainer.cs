@@ -15,6 +15,7 @@ public class WeaponSelectionContainer : MonoBehaviour
 
     [Header("Color")]
     [SerializeField] private Image[] levelImages;
+    [SerializeField] private Outline outline;
     
     public void Configure(Sprite sprite, string inName, int level, WeaponDataSO inWeaponData)
     {
@@ -23,7 +24,8 @@ public class WeaponSelectionContainer : MonoBehaviour
 
         Color imageColor = ColorHolder.GetColor(level);
         nameText.color = imageColor;
-
+        //multiplying the background color so the outline is brighter
+        outline.effectColor = imageColor + new Color(imageColor.r * 2 ,imageColor.g * 2, imageColor.b * 2, 0.5f);
         foreach (Image image in levelImages)
             image.color = imageColor;
 

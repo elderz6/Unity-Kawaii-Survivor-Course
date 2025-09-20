@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12301534b9d37cc4bb99af58e49ead72, type: 3}
-  m_Name: Character Data
+  m_Name: Dave
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
   <Sprite>k__BackingField: {fileID: 0}

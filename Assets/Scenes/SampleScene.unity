@@ -854,6 +854,8 @@ GameObject:
   - component: {fileID: 236127374}
   - component: {fileID: 236127373}
   - component: {fileID: 236127375}
+  - component: {fileID: 236127376}
+  - component: {fileID: 236127377}
   m_Layer: 7
   m_Name: Dave
   m_TagString: Untagged
@@ -1030,6 +1032,33 @@ MonoBehaviour:
   - {fileID: 1386849590}
   - {fileID: 191697224}
   - {fileID: 1644556695}
+--- !u!114 &236127376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236127365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a346688584bf1d848bf0facf5472be7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Objects>k__BackingField:
+  - {fileID: 11400000, guid: f706859163710a042880237f4954d628, type: 2}
+--- !u!114 &236127377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236127365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2fe70523e8aa740b5088b3eb040936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 1065e2bc702218445a7225f4ca8d9743, type: 2}
 --- !u!1 &251026595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,7 +2070,6 @@ Transform:
   - {fileID: 1337344457}
   - {fileID: 974031344}
   - {fileID: 506552523}
-  - {fileID: 1708480160}
   - {fileID: 651529292}
   - {fileID: 229758869}
   m_Father: {fileID: 0}
@@ -2554,7 +2582,7 @@ MonoBehaviour:
   - {fileID: 1966396235}
   - {fileID: 707744186}
   - {fileID: 490335793}
-  playerStatsManager: {fileID: 1708480161}
+  playerStatsManager: {fileID: 0}
 --- !u!1 &519227157
 GameObject:
   m_ObjectHideFlags: 0
@@ -7092,51 +7120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1708306311}
---- !u!1 &1708480159
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1708480160}
-  - component: {fileID: 1708480161}
-  m_Layer: 0
-  m_Name: Player Stats Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1708480160
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708480159}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 431587255}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1708480161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708480159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2fe70523e8aa740b5088b3eb040936, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 1065e2bc702218445a7225f4ca8d9743, type: 2}
 --- !u!1 &1717712560
 GameObject:
   m_ObjectHideFlags: 0
