@@ -19,19 +19,21 @@ public class WeaponSelectionContainer : MonoBehaviour
     public void Configure(Sprite sprite, string inName, int level, WeaponDataSO inWeaponData)
     {
         icon.sprite = sprite;
-        nameText.text = inName;
+        nameText.text = inName + $" lvl {level + 1}";
 
         Color imageColor = ColorHolder.GetColor(level);
         nameText.color = imageColor;
 
         foreach (Image image in levelImages)
             image.color = imageColor;
-        ConfigureStatContainers(inWeaponData);
+
+        Dictionary<Stat, float> calculatedStats = WeaponStatsCalculator.GetStats(inWeaponData, level);
+        ConfigureStatContainers(calculatedStats);
     }
 
-    private void ConfigureStatContainers(WeaponDataSO weaponData)
+    private void ConfigureStatContainers(Dictionary<Stat, float>  calculatedStats)
     {
-        StatContainerManager.GenerateStatContainers(weaponData.BaseStats, statsContainerParent);
+        StatContainerManager.GenerateStatContainers(calculatedStats, statsContainerParent);
     }
 
     public void Select()

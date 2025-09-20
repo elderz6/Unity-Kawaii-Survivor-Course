@@ -27,7 +27,7 @@ public class StatContainerManager : MonoBehaviour
 
             Sprite weaponIcon = ResourcesManager.GetStatIcon(kvp.Key);
             string statName = Enums.FormatStatName(kvp.Key);
-            string statValue = kvp.Value.ToString();
+            string statValue = kvp.Value.ToString("F");
             
             containerInstance.Configure(weaponIcon, statName, statValue);
         }
