@@ -3,16 +3,11 @@ using System;
 public class Chest : DroppableItem
 {
     [Header("Actions")] 
-    public static Action onColleted;
-
-    public void Collect(Player player)
-    {
-        onColleted?.Invoke();
-        Destroy(gameObject);
-    }
+    public static Action<Chest> onCollected;
 
     protected override void Collected()
     {
-        throw new NotImplementedException();
+        onCollected?.Invoke(this);
+        Destroy(gameObject);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class ResourcesManager
 {
    private const string statIconsDataPath = "Data/Stat Icons";
+   private const string objectsDataPath = "Data/Objects";
 
    private static StatIcon[] statIcons;
 
@@ -20,5 +21,13 @@ public class ResourcesManager
       
       Debug.LogError($"Could not find stat icon {stat}");
       return null;
+   }
+
+
+   private static ObjectDataSO[] objectData;
+   public static ObjectDataSO[] Objects
+   {
+      get => objectData ??= Resources.LoadAll<ObjectDataSO>(objectsDataPath);
+      private set{}
    }
 }
