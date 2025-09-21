@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3dfd0e4ae90eac42af70611152e034d, type: 3}
   m_Name: Bike
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Bike
   <Icon>k__BackingField: {fileID: -460769226430981451, guid: e2b501b9b8126574ba147cee4db1cf55, type: 3}
   <Price>k__BackingField: 100
-  <Rarity>k__BackingField: 0
+  <Rarity>k__BackingField: 1
   statDatas:
   - stat: 4
     value: 3

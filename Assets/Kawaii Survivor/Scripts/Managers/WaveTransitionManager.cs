@@ -9,6 +9,9 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     [SerializeField] private PlayerStatsManager playerStatsManager;
     [SerializeField] private GameObject upgradeContainerParent;
     
+    [Header("Player")]
+    [SerializeField] private PlayerObjects playerObjects;
+    
     [Header("Chest Settings")]
     [SerializeField] private ChestObjectContainer chestObjectContainer;
     [SerializeField] private Transform chestContainerParent;
@@ -57,6 +60,7 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
 
     private void TryOpenChest()
     {
+        chestContainerParent.Clear();
         if (chestsCollected > 0)
             ShowObject();
         else 
@@ -73,7 +77,14 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         
         ChestObjectContainer containerInstance = Instantiate(chestObjectContainer, chestContainerParent);
         containerInstance.Configure(randomObject);
-        Debug.Log($"Chests collected: {chestsCollected}");
+        
+        containerInstance.TakeButton.onClick.AddListener(() => TakeButtonCallback(randomObject));
+    }
+
+    private void TakeButtonCallback(ObjectDataSO takenObject)
+    {
+        playerObjects.AddObject(takenObject);
+        TryOpenChest();
     }
 
     private void BonusSelectedCallback()

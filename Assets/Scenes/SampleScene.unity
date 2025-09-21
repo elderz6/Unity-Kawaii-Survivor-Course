@@ -2583,6 +2583,7 @@ MonoBehaviour:
   - {fileID: 490335793}
   playerStatsManager: {fileID: 236127377}
   upgradeContainerParent: {fileID: 671292420}
+  playerObjects: {fileID: 236127376}
   chestObjectContainer: {fileID: 3649415572176216224, guid: f5c8a84713d75944eb69769d048c6021, type: 3}
   chestContainerParent: {fileID: 2020315838}
 --- !u!1 &519227157
