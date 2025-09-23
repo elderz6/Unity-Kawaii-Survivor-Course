@@ -55,10 +55,11 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
             int randomIndex = Random.Range(0, Enum.GetValues(typeof(Stat)).Length);
             Stat stat = (Stat)Enum.GetValues(typeof(Stat)).GetValue(randomIndex);
             string randomStatString = Enums.FormatStatName(stat);
+            Sprite upgradeSprite = ResourcesManager.GetStatIcon(stat);
 
             Action buttonAction = GetActionToPerform(stat, out string buttonString);
             
-            upgradeContainer.Configure(null, randomStatString, buttonString);
+            upgradeContainer.Configure(upgradeSprite, randomStatString, buttonString);
             upgradeContainer.Button.onClick.RemoveAllListeners();
             upgradeContainer.Button.onClick.AddListener(() => buttonAction?.Invoke());
             upgradeContainer.Button.onClick.AddListener(BonusSelectedCallback);
@@ -109,7 +110,7 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     private Action GetActionToPerform(Stat stat, out string buttonString)
     {
         float value = Random.Range(1, 10);
-        buttonString = "+" + value;
+        buttonString = $"{Enums.FormatStatName(stat)} + {value}";
         return () => playerStatsManager.AddPlayerStats(stat, value);
     }
     

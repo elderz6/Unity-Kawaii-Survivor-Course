@@ -98,9 +98,7 @@ public class PlayerHealth : MonoBehaviour, IPlayerStatsDependency
     public void UpdateStats(PlayerStatsManager playerStatsManager)
     {
         float addedHealth = playerStatsManager.GetStatValue(Stat.MaxHealth);
-        Debug.Log(addedHealth);
         maxHealth = baseMaxHealth + (int)addedHealth;
-        Debug.Log(maxHealth);
         maxHealth = Mathf.Max(maxHealth, 1);
         currentHealth = maxHealth;
         UpdateHealthUI();
