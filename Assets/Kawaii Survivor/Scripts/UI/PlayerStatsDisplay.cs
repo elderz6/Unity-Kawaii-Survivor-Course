@@ -15,9 +15,9 @@ public class PlayerStatsDisplay : MonoBehaviour, IPlayerStatsDependency
             statContainer.gameObject.SetActive(true);
 
             Sprite statIcon = ResourcesManager.GetStatIcon(stat);
-            string statValue = playerStatsManager.GetStatValue(stat).ToString("F2");
+            float statValue = playerStatsManager.GetStatValue(stat);
             
-            statContainer.Configure(statIcon, Enums.FormatStatName(stat), statValue);
+            statContainer.Configure(statIcon, Enums.FormatStatName(stat), statValue, true);
             
             index++;
         }

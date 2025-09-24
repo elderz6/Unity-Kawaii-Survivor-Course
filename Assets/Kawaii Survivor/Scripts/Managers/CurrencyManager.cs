@@ -12,20 +12,22 @@ public class CurrencyManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        UpdateTexts();
     }
 
     public void AddCurrency(int amount)
     {
         Currency += amount;
+        UpdateTexts();
+    }
+
+    private void UpdateTexts()
+    {
+        CurrencyText[] texts = FindObjectsByType<CurrencyText>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (CurrencyText text in texts)
+            text.UpdateText(Currency.ToString());
     }
 }
