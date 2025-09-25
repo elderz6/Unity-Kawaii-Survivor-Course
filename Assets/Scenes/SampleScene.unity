@@ -6216,7 +6216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   containersParent: {fileID: 1716247044}
-  shopItemContainerPrefab: {fileID: 5822538012711813146, guid: 8b49052612cdb524c8b34a7090667055, type: 3}
+  shopItemContainerPrefab: {fileID: 3125671091735599694, guid: 8b49052612cdb524c8b34a7090667055, type: 3}
 --- !u!1 &822841127
 GameObject:
   m_ObjectHideFlags: 0
@@ -8802,7 +8802,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 236127371}
-  waveDuration: 10
+  waveDuration: 0
   waves:
   - name: 1
     segments:

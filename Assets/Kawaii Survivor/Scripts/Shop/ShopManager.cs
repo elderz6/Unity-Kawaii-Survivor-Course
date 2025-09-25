@@ -4,7 +4,7 @@ public class ShopManager : MonoBehaviour, IGameStateListener
 {
     [Header("Elements")]
     [SerializeField] private Transform containersParent;
-    [SerializeField] private GameObject shopItemContainerPrefab;
+    [SerializeField] private ShopItemContainer shopItemContainerPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,9 +29,22 @@ public class ShopManager : MonoBehaviour, IGameStateListener
         containersParent.Clear();
 
         int shopItems = 6;
-        for (int i = 0; i < shopItems; i++)
+        int weaponContainersCount = Random.Range(Mathf.Min(2, shopItems), shopItems);
+        int objectContainsCount = shopItems - weaponContainersCount;
+        
+        for (int i = 0; i < weaponContainersCount; i++)
         {
-            Instantiate(shopItemContainerPrefab, containersParent);
+            ShopItemContainer weaponContainerInstance = Instantiate(shopItemContainerPrefab, containersParent);
+            WeaponDataSO randomWeapon = ResourcesManager.GetRandomWeapon();
+            int level = Random.Range(0, 2);
+            weaponContainerInstance.Configure(level, randomWeapon);
+        }
+        for (int i = 0; i < objectContainsCount; i++)
+        {
+            ShopItemContainer objectContainerInstance = Instantiate(shopItemContainerPrefab, containersParent);
+            ObjectDataSO randomObject = ResourcesManager.GetRandomObject();
+            
+            objectContainerInstance.Configure(randomObject);
         }
     }
 }
