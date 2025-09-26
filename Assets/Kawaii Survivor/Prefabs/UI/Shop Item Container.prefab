@@ -1659,7 +1659,6 @@ GameObject:
   - component: {fileID: 3780721616460505578}
   - component: {fileID: 5062127893010964205}
   - component: {fileID: 2048226957361916486}
-  - component: {fileID: 1168702892052631882}
   - component: {fileID: 8353334613875401617}
   m_Layer: 5
   m_Name: Currency Container (1)
@@ -1741,19 +1740,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0.42745098, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
---- !u!114 &1168702892052631882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8780476876570443118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e32d3f90c18a6240a74b64a164ba785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currencyText: {fileID: 2125755233712100173}
 --- !u!114 &8353334613875401617
 MonoBehaviour:
   m_ObjectHideFlags: 0

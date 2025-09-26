@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -9,22 +10,32 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     [Header("Elements")]
     [SerializeField] private Transform containersParent;
     [SerializeField] private ShopItemContainer shopItemContainerPrefab;
+    
+    [Header("Reroll")]
     [SerializeField] private Button rerollButton;
+    [SerializeField] private int rerollPrice;
+    [SerializeField] private TextMeshProUGUI rerollPriceText;
+    
     
     private void Awake()
     {
         rerollButton.onClick.AddListener(Reroll);
+        CurrencyManager.onUpdated += CurrencyUpdatedCallback;
     }
 
     private void OnDestroy()
     {
         rerollButton.onClick.RemoveAllListeners();
+        CurrencyManager.onUpdated -= CurrencyUpdatedCallback;
     }
 
     public void GameStateChangedCallback(GameState state)
     {
         if (state == GameState.SHOP)
+        {
             Configure();
+            UpdateRerollVisuals();
+        }
     }
 
     private void Configure()
@@ -69,5 +80,18 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     private void Reroll()
     {
         Configure();
+        CurrencyManager.instance.SpendCurrency(rerollPrice);
+        UpdateRerollVisuals();
+    }
+
+    private void UpdateRerollVisuals()
+    {
+        rerollPriceText.text = rerollPrice.ToString();
+        rerollButton.interactable = CurrencyManager.instance.HasEnoughCurrency(rerollPrice);
+    }
+
+    private void CurrencyUpdatedCallback()
+    {
+        UpdateRerollVisuals();
     }
 }

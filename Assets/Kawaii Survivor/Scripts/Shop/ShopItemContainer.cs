@@ -72,7 +72,7 @@ public class ShopItemContainer : MonoBehaviour
         StatContainerManager.GenerateStatContainers(stats, statsContainerParent);
     }
 
-    public void LockButtonCallback()
+    private void LockButtonCallback()
     {
         IsLocked = !IsLocked;
         UpdateLockVisuals();
