@@ -16,16 +16,22 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     [SerializeField] private int rerollPrice;
     [SerializeField] private TextMeshProUGUI rerollPriceText;
     
+    [Header("Player Components")]
+    [SerializeField] private PlayerWeapons playerWeapons;
+    [SerializeField] private PlayerObjects playerObjects;
+    
     
     private void Awake()
     {
         rerollButton.onClick.AddListener(Reroll);
+        ShopItemContainer.onPurchased += ItemPurchasedCallback;
         CurrencyManager.onUpdated += CurrencyUpdatedCallback;
     }
 
     private void OnDestroy()
     {
         rerollButton.onClick.RemoveAllListeners();
+        ShopItemContainer.onPurchased -= ItemPurchasedCallback;
         CurrencyManager.onUpdated -= CurrencyUpdatedCallback;
     }
 
@@ -94,4 +100,32 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     {
         UpdateRerollVisuals();
     }
+    
+    
+    private void ItemPurchasedCallback(ShopItemContainer container, int weaponLevel)
+    {
+        if (container.WeaponData)
+            TryPurchaseWeapon(container, weaponLevel);
+        else
+            PurchaseObject(container);
+    }
+
+    private void TryPurchaseWeapon(ShopItemContainer container, int weaponLevel)
+    {
+        if (playerWeapons.TryAddWeapon(container.WeaponData, weaponLevel))
+            AfterPurchase(container);
+    }
+
+    private void AfterPurchase(ShopItemContainer container)
+    {
+        CurrencyManager.instance.SpendCurrency(container.purchasePrice);
+        Destroy(container.gameObject);
+    }
+
+    private void PurchaseObject(ShopItemContainer container)
+    {
+        playerObjects.AddObject(container.ObjectData);
+        AfterPurchase(container);
+    }
+
 }

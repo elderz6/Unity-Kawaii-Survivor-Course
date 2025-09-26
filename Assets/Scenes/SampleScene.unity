@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 99999
+  m_text: 1500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4807,7 +4807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 99999
+  m_text: 1500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6265,6 +6265,8 @@ MonoBehaviour:
   rerollButton: {fileID: 1460594118}
   rerollPrice: 100
   rerollPriceText: {fileID: 159045843}
+  playerWeapons: {fileID: 236127375}
+  playerObjects: {fileID: 236127376}
 --- !u!1 &822841127
 GameObject:
   m_ObjectHideFlags: 0
@@ -8850,7 +8852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 236127371}
-  waveDuration: 0
+  waveDuration: 10
   waves:
   - name: 1
     segments:
@@ -9244,7 +9246,6 @@ GameObject:
   - component: {fileID: 1460594117}
   - component: {fileID: 1460594116}
   - component: {fileID: 1460594115}
-  - component: {fileID: 1460594114}
   - component: {fileID: 1460594118}
   m_Layer: 5
   m_Name: Reroll Button
@@ -9273,19 +9274,6 @@ RectTransform:
   m_AnchoredPosition: {x: 566.6666, y: 0}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1460594114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1460594112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e32d3f90c18a6240a74b64a164ba785, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currencyText: {fileID: 159045843}
 --- !u!114 &1460594115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12707,7 +12695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850b3fd36e5cf5344a57ae65b5bd0641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Currency>k__BackingField: 0
+  <Currency>k__BackingField: 1500
 --- !u!1 &1840584142
 GameObject:
   m_ObjectHideFlags: 0
