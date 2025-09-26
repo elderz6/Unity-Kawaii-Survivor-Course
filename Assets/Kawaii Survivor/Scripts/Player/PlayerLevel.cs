@@ -68,7 +68,7 @@ public class PlayerLevel : MonoBehaviour
 
     public bool HasLeveledUp()
     {
-        if (timesLeveledUp >= 0)
+        if (timesLeveledUp > 0)
         {
             timesLeveledUp--;
             return true;

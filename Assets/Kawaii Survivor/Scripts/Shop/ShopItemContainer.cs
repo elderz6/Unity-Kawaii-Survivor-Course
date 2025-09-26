@@ -18,6 +18,21 @@ public class ShopItemContainer : MonoBehaviour
     [SerializeField] private Image[] levelImages;
     [SerializeField] private Outline outline;
     
+    [Header("Lock Elements")]
+    [SerializeField] private Button lockButton;
+    [SerializeField] private Sprite lockedSprite, unlockedSprite;
+    public bool IsLocked { get; private set; }
+
+    private void Awake()
+    {
+        lockButton.onClick.AddListener(LockButtonCallback);
+    }
+
+    private void OnDestroy()
+    {
+        lockButton.onClick.RemoveAllListeners();
+    }
+    
     public void Configure(int level, WeaponDataSO inWeaponData)
     {
         icon.sprite = inWeaponData.Sprite;
@@ -55,5 +70,16 @@ public class ShopItemContainer : MonoBehaviour
     {
         statsContainerParent.Clear();
         StatContainerManager.GenerateStatContainers(stats, statsContainerParent);
+    }
+
+    public void LockButtonCallback()
+    {
+        IsLocked = !IsLocked;
+        UpdateLockVisuals();
+    }
+
+    private void UpdateLockVisuals()
+    {
+        lockButton.image.sprite = IsLocked ? lockedSprite : unlockedSprite;
     }
 }

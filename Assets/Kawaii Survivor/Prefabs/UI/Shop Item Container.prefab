@@ -806,6 +806,9 @@ MonoBehaviour:
   levelImages:
   - {fileID: 4771900686187188437}
   outline: {fileID: 9181080031876837221}
+  lockButton: {fileID: 3787739845558488102}
+  lockedSprite: {fileID: -5620155193319629329, guid: 5bf7f0050ae64884fb73a265bed13e87, type: 3}
+  unlockedSprite: {fileID: 7451771499657765821, guid: e6e0c4110e86bfe48812aeb60cdf44fc, type: 3}
 --- !u!1 &6842479501046386327
 GameObject:
   m_ObjectHideFlags: 0

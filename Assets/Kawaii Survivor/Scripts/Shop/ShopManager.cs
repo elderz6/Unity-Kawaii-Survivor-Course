@@ -1,21 +1,24 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ShopManager : MonoBehaviour, IGameStateListener
 {
     [Header("Elements")]
     [SerializeField] private Transform containersParent;
     [SerializeField] private ShopItemContainer shopItemContainerPrefab;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Button rerollButton;
+    
+    private void Awake()
     {
-        
+        rerollButton.onClick.AddListener(Reroll);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        rerollButton.onClick.RemoveAllListeners();
     }
 
     public void GameStateChangedCallback(GameState state)
@@ -26,9 +29,24 @@ public class ShopManager : MonoBehaviour, IGameStateListener
 
     private void Configure()
     {
-        containersParent.Clear();
+        //containersParent.Clear();
+        List<GameObject> toDestroy = new List<GameObject>();
+        for (int i = 0; i < containersParent.childCount; i++)
+        {
+            ShopItemContainer container = containersParent.GetChild(i).GetComponent<ShopItemContainer>();
+            if(!container.IsLocked)
+                toDestroy.Add(container.gameObject);
+        }
 
-        int shopItems = 6;
+        while (toDestroy.Count > 0)
+        {
+            Transform destroyed = toDestroy[0].transform;
+            destroyed.SetParent(null);
+            Destroy(destroyed.gameObject);
+            toDestroy.RemoveAt(0);
+        }
+
+        int shopItems = 6 - containersParent.childCount;
         int weaponContainersCount = Random.Range(Mathf.Min(2, shopItems), shopItems);
         int objectContainsCount = shopItems - weaponContainersCount;
         
@@ -46,5 +64,10 @@ public class ShopManager : MonoBehaviour, IGameStateListener
             
             objectContainerInstance.Configure(randomObject);
         }
+    }
+
+    private void Reroll()
+    {
+        Configure();
     }
 }
